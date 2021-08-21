@@ -10,10 +10,25 @@
   flex-basis: 100%;
 }
 
-#inventory {
-  height: 50vh;
+#shop {
+  height: 40vh;
+  margin-top: 5vh;
   border-style: solid;
   background-color: #999;
+  overflow: auto;
+}
+
+#shopItems {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+}
+
+#inventory {
+  height: 40vh;
+  margin-top: 5vh;
+  border-style: solid;
+  background-color: #999;
+  overflow: auto;
 }
 
 #invItems {

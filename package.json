@@ -17,6 +17,7 @@
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",
     "react-scripts": "4.0.3",
+    "redux-persist": "^6.0.0",
     "typescript": "~4.1.5"
   },
   "scripts": {
@@ -42,5 +43,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://bu-gye-jeong.github.io/not-a-merge-game"
+  "homepage": "https://bu-gye-jeong.github.io/not-a-merge-game",
+  "devDependencies": {
+    "@types/redux-persist": "^4.3.1"
+  }
 }

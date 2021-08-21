@@ -1,5 +1,6 @@
 import React from "react";
 import { Inventory } from "./containers/inventory";
+import { Shop } from "./containers/shop";
 import { addNumber } from "./slices/saveSlice";
 import { useAppDispatch } from "./utils/hooks";
 
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className="App">
+      <Shop />
       <Inventory />
       <button onClick={handleAddNumber}>add number</button>
       <button onClick={clearLocalStorage}>reset localStorage</button>
