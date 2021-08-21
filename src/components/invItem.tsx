@@ -2,16 +2,18 @@ import React from "react";
 
 export const InvItem = ({
   content,
-  canClick,
+  cannotClick,
   onClick,
 }: {
   content: number;
-  canClick: boolean;
+  cannotClick: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
   return (
-    <span className={`invItem ${canClick ? "canClick" : ""}`} onClick={onClick}>
+    <button
+      className={`invItem ${cannotClick ? "cannotClick" : ""}`}
+      onClick={onClick}>
       {content}
-    </span>
+    </button>
   );
 };

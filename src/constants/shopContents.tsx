@@ -1,3 +1,5 @@
+// Shop Contents
+
 export interface IShopContent {
   paramCount: number;
   exp: string;

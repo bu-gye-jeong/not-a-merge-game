@@ -5,13 +5,13 @@ export const ShopItem = ({
   content,
   isOpen,
   isClicked,
-  canClick,
+  cannotClick,
   onClick,
 }: {
   content: IShopContent;
   isOpen: boolean;
   isClicked: boolean;
-  canClick: boolean;
+  cannotClick: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
   return (
@@ -19,7 +19,7 @@ export const ShopItem = ({
       className={`shopItem 
             ${isOpen ? "unlocked" : "locked"} 
             ${isClicked ? "clicked" : ""}
-            ${canClick ? "canClick" : ""}`}
+            ${cannotClick ? "cannotClick" : ""}`}
       onClick={onClick}>
       {isOpen ? content.exp : content.price + " to unlock"}
     </button>

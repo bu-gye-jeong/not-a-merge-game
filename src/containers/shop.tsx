@@ -31,8 +31,8 @@ export const Shop = () => {
             isOpen={isBought[index]}
             isClicked={index === clickedShop}
             onClick={() => handleClick(index)}
-            canClick={
-              clickedShop === undefined && shopContents[index].price <= money
+            cannotClick={
+              clickedShop !== undefined || shopContents[index].price > money
             }
             key={index}></ShopItem>
         );
@@ -41,7 +41,7 @@ export const Shop = () => {
   );
 
   return (
-    <div id="shop">
+    <div id="shop" className="tab">
       <h3 className="title">Shop</h3>
       {shopItems}
     </div>

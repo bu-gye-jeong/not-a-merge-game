@@ -9,6 +9,47 @@
   font-family: "Bungee", cursive;
 }
 
+body {
+  background-color: #111;
+}
+
+.tabNav {
+  display: inline-block;
+  margin: 10px;
+  padding-left: 2em;
+  padding-right: 2em;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.tabNav:not(:hover) {
+  transition-duration: 0.2s;
+  background-color: #999;
+  box-shadow: 0 0 0 2px #000 inset;
+}
+
+.tabNav:hover {
+  transition-duration: 0.3s;
+  background-color: #777;
+  cursor: pointer;
+}
+
+.tab {
+  height: 40vh;
+  border-style: solid;
+  background-color: #999;
+  overflow: auto;
+}
+
+.tab button {
+  display: inline-block;
+  margin: 5%;
+  border: 0;
+  background-color: #bbb;
+  text-align: center;
+  vertical-align: middle;
+}
+
 .title {
   text-align: center;
   position: sticky;
@@ -16,39 +57,21 @@
   flex-basis: 100%;
 }
 
-.canClick:not(:hover) {
+.tab button:not(:hover):not(.cannotClick) {
   transition-duration: 0.2s;
   background-color: #aaa;
   box-shadow: 0 0 0 2px #000 inset;
 }
 
-.canClick:hover {
+.tab button:hover:not(.cannotClick) {
   transition-duration: 0.3s;
   background-color: #777;
   cursor: pointer;
 }
 
-#shop {
-  height: 40vh;
-  margin-top: 5vh;
-  border-style: solid;
-  background-color: #999;
-  overflow: auto;
-}
-
 #shopItems {
   display: grid;
   grid-template-columns: 50% 50%;
-}
-
-.shopItem {
-  display: inline-block;
-  margin: 5%;
-  width: 90%;
-  border: 0;
-  background-color: #bbb;
-  text-align: center;
-  vertical-align: middle;
 }
 
 .shopItem.unlocked {
@@ -61,23 +84,10 @@
 }
 
 #inventory {
-  height: 40vh;
   margin-top: 5vh;
-  border-style: solid;
-  background-color: #999;
-  overflow: auto;
 }
 
 #invItems {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
-}
-
-.invItem {
-  display: inline-block;
-  margin: 5%;
-  border: 0;
-  background-color: #bbb;
-  text-align: center;
-  vertical-align: middle;
 }

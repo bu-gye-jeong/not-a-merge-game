@@ -12,7 +12,7 @@ interface ISaveState {
 
 export const initialState = {
   inventory: [1],
-  invMax: 20,
+  invMax: 5,
   itemBought: new Array(shopContents.length).fill(false),
   money: 0,
 } as ISaveState;
@@ -52,6 +52,15 @@ const saveSlice = createSlice({
       }
       state.clickedNumber.push(action.payload);
     },
+    hardReset(state, action: PayloadAction) {
+      state.invMax = initialState.invMax;
+      state.inventory = initialState.inventory;
+      state.itemBought = initialState.itemBought;
+      state.money = initialState.money;
+      delete state.clickedNumber;
+      delete state.clickedShop;
+      localStorage.removeItem("notAMergeGame");
+    },
   },
 });
 
@@ -64,6 +73,7 @@ export const {
   clearClicked,
   clickNumber,
   clickShop,
+  hardReset,
 } = saveSlice.actions;
 
 export default saveSlice.reducer;

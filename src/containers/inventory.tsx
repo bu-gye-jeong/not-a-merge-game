@@ -13,6 +13,11 @@ export const Inventory = () => {
   const clickedNumber = useAppSelector((state) => state.save.clickedNumber);
 
   const handleClick = (index: number) => {
+    if (
+      clickedShop === undefined ||
+      (clickedNumber !== undefined && clickedNumber.includes(index))
+    )
+      return;
     const shopContent = shopContents[clickedShop!];
     if (clickedNumber?.length ?? 0 + 1 < shopContent.paramCount)
       return dispatch(clickNumber(index));
@@ -24,7 +29,7 @@ export const Inventory = () => {
   };
 
   return (
-    <div id="inventory">
+    <div id="inventory" className="tab">
       <h3 className="title">
         Inventory - {inventory.length} / {invMax}
       </h3>
@@ -33,9 +38,9 @@ export const Inventory = () => {
           return (
             <InvItem
               content={item}
-              canClick={
-                clickedShop !== undefined &&
-                (clickedNumber === undefined || !clickedNumber.includes(index))
+              cannotClick={
+                clickedShop === undefined ||
+                (clickedNumber !== undefined && clickedNumber.includes(index))
               }
               onClick={() => handleClick(index)}
               key={index}></InvItem>
