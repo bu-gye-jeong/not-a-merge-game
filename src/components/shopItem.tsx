@@ -17,11 +17,13 @@ export const ShopItem = ({
   return (
     <button
       className={`shopItem 
-            ${isOpen ? "unlocked" : "locked"} 
             ${isClicked ? "clicked" : ""}
             ${cannotClick ? "cannotClick" : ""}`}
       onClick={onClick}>
-      {isOpen ? content.exp : content.price + " to unlock"}
+      {isOpen ? <span className="exp">{content.exp}</span> : ""}
+      {isOpen
+        ? " - Cost : " + content.price
+        : content.unlockPrice + " to unlock"}
     </button>
   );
 };

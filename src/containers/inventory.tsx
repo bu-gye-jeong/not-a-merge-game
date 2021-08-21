@@ -11,6 +11,7 @@ export const Inventory = () => {
   const invMax = useAppSelector((state) => state.save.invMax);
   const clickedShop = useAppSelector((state) => state.save.clickedShop);
   const clickedNumber = useAppSelector((state) => state.save.clickedNumber);
+  const money = useAppSelector((state) => state.save.money);
 
   const handleClick = (index: number) => {
     if (
@@ -33,6 +34,7 @@ export const Inventory = () => {
       <h3 className="title">
         Inventory - {inventory.length} / {invMax}
       </h3>
+      <h3 id="resourceDisplayer">Money : {money}</h3>
       <div id="invItems">
         {inventory.map((item, index) => {
           return (

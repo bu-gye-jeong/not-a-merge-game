@@ -13,6 +13,10 @@ body {
   background-color: #111;
 }
 
+:is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+
 .tabNav {
   display: inline-block;
   margin: 10px;
@@ -36,14 +40,13 @@ body {
 
 .tab {
   height: 40vh;
-  border-style: solid;
+  border: 2px solid;
   background-color: #999;
   overflow: auto;
 }
 
-.tab button {
+button {
   display: inline-block;
-  margin: 5%;
   border: 0;
   background-color: #bbb;
   text-align: center;
@@ -53,17 +56,16 @@ body {
 .title {
   text-align: center;
   position: sticky;
-  margin-top: 0;
   flex-basis: 100%;
 }
 
-.tab button:not(:hover):not(.cannotClick) {
+button:not(:hover):not(.cannotClick) {
   transition-duration: 0.2s;
   background-color: #aaa;
   box-shadow: 0 0 0 2px #000 inset;
 }
 
-.tab button:hover:not(.cannotClick) {
+button:hover:not(.cannotClick) {
   transition-duration: 0.3s;
   background-color: #777;
   cursor: pointer;
@@ -71,10 +73,14 @@ body {
 
 #shopItems {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: repeat(3, 33.33333%);
 }
 
-.shopItem.unlocked {
+.shopItem {
+  margin: 5%;
+}
+
+.exp {
   font-family: "NeoEular", Bungee;
   font-size: 1.5em;
 }
@@ -87,7 +93,21 @@ body {
   margin-top: 5vh;
 }
 
+#resourceDisplayer {
+  margin-left: 1em;
+}
+
 #invItems {
   display: grid;
-  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-columns: repeat(5, 20%);
+}
+
+.invItem {
+  margin: 5%;
+}
+
+#bottomBar {
+  text-align: right;
+  margin-right: 0.5vw;
+  margin-top: 0.5vh;
 }

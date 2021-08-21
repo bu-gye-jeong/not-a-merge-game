@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { tabs } from "./constants/tabs";
 import { Inventory } from "./containers/inventory";
-import { addNumber } from "./slices/saveSlice";
-import { useAppDispatch } from "./utils/hooks";
+import { removeNumberByIndex, addMoney } from "./slices/saveSlice";
+import { useAppDispatch, useAppSelector } from "./utils/hooks";
 
-function App() {
+function Game() {
   const dispatch = useAppDispatch();
 
   const [curTab, setTab] = useState(0);
 
-  const handleAddNumber = () => {
-    dispatch(addNumber(Math.floor(Math.random() * 20)));
-  };
+  const inv = useAppSelector((state) => state.save.inventory);
 
-  const clearLocalStorage = () => {
-    localStorage.removeItem("notAMergeGame");
+  const handleSellAll = () => {
+    let money = 0;
+    for (let i = inv.length - 1; i > 0; i--) {
+      money += inv[i];
+      dispatch(removeNumberByIndex(i));
+    }
+    dispatch(addMoney(money));
   };
 
   const tabNavs = (
@@ -34,10 +37,13 @@ function App() {
       {tabNavs}
       <Abc />
       <Inventory />
-      <button onClick={handleAddNumber}>add number</button>
-      <button onClick={clearLocalStorage}>reset localStorage</button>
+      <div id="bottomBar">
+        <button onClick={handleSellAll}>
+          <h2>Sell All</h2>
+        </button>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default Game;

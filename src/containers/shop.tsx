@@ -13,9 +13,12 @@ export const Shop = () => {
 
   function handleClick(index: number) {
     if (isBought[index]) {
+      const price = shopContents[index].price;
+      if (price > money) return;
+      dispatch(addMoney(-price));
       dispatch(clickShop(index));
     } else {
-      const price = shopContents[index].price;
+      const price = shopContents[index].unlockPrice;
       if (price > money) return;
       dispatch(addMoney(-price));
       dispatch(buyOrSellShopItem(index));
@@ -32,7 +35,9 @@ export const Shop = () => {
             isClicked={index === clickedShop}
             onClick={() => handleClick(index)}
             cannotClick={
-              clickedShop !== undefined || shopContents[index].price > money
+              clickedShop !== undefined ||
+              (isBought[index] && shopContents[index].price > money) ||
+              (!isBought[index] && shopContents[index].unlockPrice > money)
             }
             key={index}></ShopItem>
         );
