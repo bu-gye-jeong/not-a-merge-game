@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/not-a-merge-game/static/css/main.4b637f74.chunk.css",
-    "main.js": "/not-a-merge-game/static/js/main.96efe8ce.chunk.js",
-    "main.js.map": "/not-a-merge-game/static/js/main.96efe8ce.chunk.js.map",
+    "main.css": "/not-a-merge-game/static/css/main.007ea840.chunk.css",
+    "main.js": "/not-a-merge-game/static/js/main.56912338.chunk.js",
+    "main.js.map": "/not-a-merge-game/static/js/main.56912338.chunk.js.map",
     "runtime-main.js": "/not-a-merge-game/static/js/runtime-main.95947f9d.js",
     "runtime-main.js.map": "/not-a-merge-game/static/js/runtime-main.95947f9d.js.map",
     "static/js/2.33829a29.chunk.js": "/not-a-merge-game/static/js/2.33829a29.chunk.js",
     "static/js/2.33829a29.chunk.js.map": "/not-a-merge-game/static/js/2.33829a29.chunk.js.map",
     "index.html": "/not-a-merge-game/index.html",
-    "static/css/main.4b637f74.chunk.css.map": "/not-a-merge-game/static/css/main.4b637f74.chunk.css.map",
+    "static/css/main.007ea840.chunk.css.map": "/not-a-merge-game/static/css/main.007ea840.chunk.css.map",
     "static/js/2.33829a29.chunk.js.LICENSE.txt": "/not-a-merge-game/static/js/2.33829a29.chunk.js.LICENSE.txt",
     "static/media/index.css": "/not-a-merge-game/static/media/NeoEuler-VGO00.914c30d7.otf"
   },
   "entrypoints": [
     "static/js/runtime-main.95947f9d.js",
     "static/js/2.33829a29.chunk.js",
-    "static/css/main.4b637f74.chunk.css",
-    "static/js/main.96efe8ce.chunk.js"
+    "static/css/main.007ea840.chunk.css",
+    "static/js/main.56912338.chunk.js"
   ]
 }
