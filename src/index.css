@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+
+@font-face {
+  font-family: "NeoEular";
+  src: url("./resources/NeoEuler-VGO00.otf");
+}
+
 * {
   font-family: "Bungee", cursive;
 }
@@ -8,6 +14,18 @@
   position: sticky;
   margin-top: 0;
   flex-basis: 100%;
+}
+
+.canClick:not(:hover) {
+  transition-duration: 0.2s;
+  background-color: #aaa;
+  box-shadow: 0 0 0 2px #000 inset;
+}
+
+.canClick:hover {
+  transition-duration: 0.3s;
+  background-color: #777;
+  cursor: pointer;
 }
 
 #shop {
@@ -20,7 +38,26 @@
 
 #shopItems {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: 50% 50%;
+}
+
+.shopItem {
+  display: inline-block;
+  margin: 5%;
+  width: 90%;
+  border: 0;
+  background-color: #bbb;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.shopItem.unlocked {
+  font-family: "NeoEular", Bungee;
+  font-size: 1.5em;
+}
+
+.shopItem.clicked {
+  background-color: #ddd;
 }
 
 #inventory {
@@ -33,7 +70,7 @@
 
 #invItems {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
 .invItem {

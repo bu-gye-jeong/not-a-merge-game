@@ -1,10 +1,27 @@
 import React from "react";
 import { InvItem } from "../components/invItem";
-import { useAppSelector } from "../utils/hooks";
+import { shopContents } from "../constants/shopContents";
+import { addNumber, clearClicked, clickNumber } from "../slices/saveSlice";
+import { useAppDispatch, useAppSelector } from "../utils/hooks";
 
 export const Inventory = () => {
+  const dispatch = useAppDispatch();
+
   const inventory = useAppSelector((state) => state.save.inventory);
   const invMax = useAppSelector((state) => state.save.invMax);
+  const clickedShop = useAppSelector((state) => state.save.clickedShop);
+  const clickedNumber = useAppSelector((state) => state.save.clickedNumber);
+
+  const handleClick = (index: number) => {
+    const shopContent = shopContents[clickedShop!];
+    if (clickedNumber?.length ?? 0 + 1 < shopContent.paramCount)
+      return dispatch(clickNumber(index));
+    const calcParam = clickedNumber
+      ? [...clickedNumber, index].map((v) => inventory[v])
+      : [inventory[index]];
+    dispatch(addNumber(shopContent.calc(...calcParam)));
+    dispatch(clearClicked());
+  };
 
   return (
     <div id="inventory">
@@ -13,7 +30,16 @@ export const Inventory = () => {
       </h3>
       <div id="invItems">
         {inventory.map((item, index) => {
-          return <InvItem content={item} key={index}></InvItem>;
+          return (
+            <InvItem
+              content={item}
+              canClick={
+                clickedShop !== undefined &&
+                (clickedNumber === undefined || !clickedNumber.includes(index))
+              }
+              onClick={() => handleClick(index)}
+              key={index}></InvItem>
+          );
         })}
       </div>
     </div>

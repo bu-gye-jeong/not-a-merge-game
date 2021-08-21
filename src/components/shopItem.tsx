@@ -4,12 +4,24 @@ import { IShopContent } from "../constants/shopContents";
 export const ShopItem = ({
   content,
   isOpen,
+  isClicked,
+  canClick,
+  onClick,
 }: {
   content: IShopContent;
   isOpen: boolean;
+  isClicked: boolean;
+  canClick: boolean;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-  if (isOpen) {
-    return <button className="shopItem unlocked">{content.exp}</button>;
-  }
-  return <button className="shopItem locked">{content.price}</button>;
+  return (
+    <button
+      className={`shopItem 
+            ${isOpen ? "unlocked" : "locked"} 
+            ${isClicked ? "clicked" : ""}
+            ${canClick ? "canClick" : ""}`}
+      onClick={onClick}>
+      {isOpen ? content.exp : content.price + " to unlock"}
+    </button>
+  );
 };

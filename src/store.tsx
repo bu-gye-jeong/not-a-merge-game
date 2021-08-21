@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import saveReducer, {
   initialState as saveInitialState,
 } from "./slices/saveSlice";
+import { mergeObject } from "./utils/merge";
 
 const persistedState = JSON.parse(
   localStorage.getItem("notAMergeGame") || "{}"
@@ -11,7 +12,7 @@ const store = configureStore({
   reducer: {
     save: saveReducer,
   },
-  preloadedState: { ...persistedState, ...{ save: saveInitialState } },
+  preloadedState: mergeObject(persistedState, { save: saveInitialState }),
 });
 
 store.subscribe(() => {
