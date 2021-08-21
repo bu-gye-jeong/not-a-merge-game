@@ -7,7 +7,7 @@ interface ISaveState {
   itemBought: boolean[];
 }
 
-const initialState = {
+export const initialState = {
   inventory: [1],
   invMax: 20,
   itemBought: new Array(shopContents.length).fill(false),

@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import saveReducer from "./slices/saveSlice";
+import saveReducer, {
+  initialState as saveInitialState,
+} from "./slices/saveSlice";
 
 const persistedState = JSON.parse(
   localStorage.getItem("notAMergeGame") || "{}"
@@ -9,7 +11,7 @@ const store = configureStore({
   reducer: {
     save: saveReducer,
   },
-  preloadedState: persistedState,
+  preloadedState: { ...persistedState, ...{ save: saveInitialState } },
 });
 
 store.subscribe(() => {
