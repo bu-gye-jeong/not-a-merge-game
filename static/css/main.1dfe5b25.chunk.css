@@ -1,0 +1,2 @@
+@import url(https://fonts.googleapis.com/css2?family=Bungee&display=swap);*{font-family:"Bungee",cursive}.title{text-align:center;position:-webkit-sticky;position:sticky;margin-top:0;flex-basis:100%}#inventory{height:50vh;border-style:solid;background-color:#999}#invItems{display:grid;grid-template-columns:auto auto auto auto auto}.invItem{display:inline-block;margin:5%;border:0;background-color:#bbb;text-align:center;vertical-align:middle}
+/*# sourceMappingURL=main.1dfe5b25.chunk.css.map */
