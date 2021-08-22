@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { shopContents } from "../constants/shopContents";
+import { upgrades } from "../constants/upgrades";
 
-interface ISaveState {
+export interface ISaveState {
   inventory: string[];
   invMax: number;
   itemBought: boolean[];
   money: string;
+  startingNumber: string;
+  upgrade: number[];
   clickedShop?: number;
   clickedNumber?: number[];
 }
@@ -15,6 +18,8 @@ export const initialState = {
   invMax: 5,
   itemBought: new Array(shopContents.length).fill(false),
   money: "0",
+  startingNumber: "1",
+  upgrade: new Array(upgrades.length).fill(0),
 } as ISaveState;
 
 const saveSlice = createSlice({
@@ -32,7 +37,7 @@ const saveSlice = createSlice({
     buyOrSellShopItem(state, action: PayloadAction<number>) {
       state.itemBought[action.payload] = !state.itemBought[action.payload];
     },
-    changeInvMax(state, action: PayloadAction<number>) {
+    setInvMax(state, action: PayloadAction<number>) {
       state.invMax = action.payload;
       state.inventory = state.inventory.slice(0, state.invMax);
     },
@@ -57,9 +62,17 @@ const saveSlice = createSlice({
       state.inventory = initialState.inventory;
       state.itemBought = initialState.itemBought;
       state.money = initialState.money;
+      state.startingNumber = initialState.startingNumber;
+      state.upgrade = initialState.upgrade;
       delete state.clickedNumber;
       delete state.clickedShop;
       localStorage.removeItem("notAMergeGame");
+    },
+    setStartingNumber(state, action: PayloadAction<string>) {
+      state.startingNumber = action.payload;
+    },
+    buyUpgrade(state, action: PayloadAction<number>) {
+      state.upgrade[action.payload] += 1;
     },
   },
 });
@@ -68,12 +81,14 @@ export const {
   addNumber,
   removeNumberByIndex,
   buyOrSellShopItem,
-  changeInvMax,
+  setInvMax,
   setMoney,
   clearClicked,
   clickNumber,
   clickShop,
   hardReset,
+  setStartingNumber,
+  buyUpgrade,
 } = saveSlice.actions;
 
 export default saveSlice.reducer;

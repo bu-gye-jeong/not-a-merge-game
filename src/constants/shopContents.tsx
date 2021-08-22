@@ -1,6 +1,6 @@
 // Shop Contents
 
-import Decimal from "decimal.js";
+import { D } from "../utils/decimal";
 
 export interface IShopContent {
   paramCount: number;
@@ -14,14 +14,14 @@ export const shopContents: IShopContent[] = [
   {
     paramCount: 1,
     exp: "x+1",
-    calc: (num) => Decimal.add(1, num).toString(),
+    calc: (num) => D(num).add(1).toString(),
     unlockPrice: "0",
     price: "0",
   },
   {
     paramCount: 1,
     exp: "2x",
-    calc: (num) => Decimal.mul(num, 2).toString(),
+    calc: (num) => D(num).mul(2).toString(),
     unlockPrice: "100",
     price: "10",
   },

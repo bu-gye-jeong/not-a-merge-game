@@ -2,7 +2,8 @@ import Decimal from "decimal.js";
 import React, { useState } from "react";
 import { tabs } from "./constants/tabs";
 import { Inventory } from "./containers/inventory";
-import { removeNumberByIndex, setMoney } from "./slices/saveSlice";
+import { addNumber, removeNumberByIndex, setMoney } from "./slices/saveSlice";
+import { D } from "./utils/decimal";
 import { useAppDispatch, useAppSelector } from "./utils/hooks";
 
 function Game() {
@@ -12,13 +13,15 @@ function Game() {
 
   const inv = useAppSelector((state) => state.save.inventory);
   const money = useAppSelector((state) => state.save.money);
+  const startingNumber = useAppSelector((state) => state.save.startingNumber);
 
   const handleSellAll = () => {
-    let moneyToAdd = new Decimal("0");
-    for (let i = inv.length - 1; i > 0; i--) {
+    let moneyToAdd = D("0");
+    for (let i = inv.length - 1; i >= 0; i--) {
       moneyToAdd = moneyToAdd.add(inv[i]);
       dispatch(removeNumberByIndex(i));
     }
+    dispatch(addNumber(startingNumber));
     dispatch(setMoney(Decimal.add(money, moneyToAdd).toString()));
   };
 

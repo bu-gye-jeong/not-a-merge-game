@@ -89,12 +89,24 @@ button:hover:not(.cannotClick) {
 }
 
 .exp {
-  font-family: "NeoEular", Bungee;
+  font-family: "NeoEular";
   font-size: 1.5em;
 }
 
 .shopItem.clicked {
   background-color: #ddd;
+}
+
+/* upgrades */
+#upgradesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+}
+
+.upgrade {
+  line-height: 2em;
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 /* options */
