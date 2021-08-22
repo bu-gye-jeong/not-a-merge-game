@@ -12,6 +12,7 @@ export const Options = () => {
 
   return (
     <div id="options" className="tab">
+      <h3 className="title">Option</h3>
       <ResetButton reset={reset}></ResetButton>
     </div>
   );

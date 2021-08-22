@@ -5,7 +5,7 @@ export const InvItem = ({
   cannotClick,
   onClick,
 }: {
-  content: number;
+  content: string;
   cannotClick: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {

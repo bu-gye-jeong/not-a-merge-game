@@ -17,46 +17,13 @@ body {
   margin: 0;
 }
 
-.tabNav {
-  display: inline-block;
-  margin: 10px;
-  padding-left: 2em;
-  padding-right: 2em;
-  border-radius: 1em;
-  cursor: pointer;
-}
-
-.tabNav:not(:hover) {
-  transition-duration: 0.2s;
-  background-color: #999;
-  box-shadow: 0 0 0 2px #000 inset;
-}
-
-.tabNav:hover {
-  transition-duration: 0.3s;
-  background-color: #777;
-  cursor: pointer;
-}
-
-.tab {
-  height: 40vh;
-  border: 2px solid;
-  background-color: #999;
-  overflow: auto;
-}
-
+/* button (+ transition) */
 button {
   display: inline-block;
   border: 0;
   background-color: #bbb;
   text-align: center;
   vertical-align: middle;
-}
-
-.title {
-  text-align: center;
-  position: sticky;
-  flex-basis: 100%;
 }
 
 button:not(:hover):not(.cannotClick) {
@@ -71,6 +38,47 @@ button:hover:not(.cannotClick) {
   cursor: pointer;
 }
 
+/* tabs  */
+.tabNav {
+  display: inline-block;
+  margin: 10px;
+  padding-left: 2em;
+  padding-right: 2em;
+  border-radius: 1em;
+  cursor: pointer;
+}
+
+.tabNav:not(:hover):not(.selected) {
+  transition-duration: 0.2s;
+  background-color: #999;
+  box-shadow: 0 0 0 2px #000 inset;
+}
+
+.tabNav:hover:not(.selected) {
+  transition-duration: 0.3s;
+  background-color: #777;
+  cursor: pointer;
+}
+
+.tabNav.selected {
+  background-color: #ddd;
+  cursor: default;
+}
+
+.tab {
+  height: 40vh;
+  border: 2px solid;
+  background-color: #999;
+  overflow: auto;
+}
+
+.title {
+  text-align: center;
+  position: sticky;
+  flex-basis: 100%;
+}
+
+/* shop */
 #shopItems {
   display: grid;
   grid-template-columns: repeat(3, 33.33333%);
@@ -89,6 +97,12 @@ button:hover:not(.cannotClick) {
   background-color: #ddd;
 }
 
+/* options */
+#options {
+  text-align: center;
+}
+
+/* inventory */
 #inventory {
   margin-top: 5vh;
 }

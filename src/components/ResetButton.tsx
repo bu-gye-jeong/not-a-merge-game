@@ -15,7 +15,7 @@ export const ResetButton = ({ reset }: { reset(): void }) => {
   };
 
   return (
-    <button onClick={handleClick} className="plainButton">
+    <button onClick={handleClick} id="resetButton" className="plainButton">
       Press {countToReset - count} more time to <b>HARD RESET</b>
     </button>
   );

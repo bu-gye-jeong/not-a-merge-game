@@ -1,7 +1,8 @@
+import Decimal from "decimal.js";
 import React from "react";
 import { ShopItem } from "../components/shopItem";
 import { shopContents } from "../constants/shopContents";
-import { addMoney, buyOrSellShopItem, clickShop } from "../slices/saveSlice";
+import { setMoney, buyOrSellShopItem, clickShop } from "../slices/saveSlice";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 
 export const Shop = () => {
@@ -12,15 +13,16 @@ export const Shop = () => {
   const clickedShop = useAppSelector((state) => state.save.clickedShop);
 
   function handleClick(index: number) {
+    const DecMoney = new Decimal(money);
     if (isBought[index]) {
-      const price = shopContents[index].price;
-      if (price > money) return;
-      dispatch(addMoney(-price));
+      const price = new Decimal(shopContents[index].price);
+      if (price.gt(DecMoney)) return;
+      dispatch(setMoney(DecMoney.sub(price).toString()));
       dispatch(clickShop(index));
     } else {
-      const price = shopContents[index].unlockPrice;
-      if (price > money) return;
-      dispatch(addMoney(-price));
+      const price = new Decimal(shopContents[index].unlockPrice);
+      if (price.gt(DecMoney)) return;
+      dispatch(setMoney(DecMoney.sub(price).toString()));
       dispatch(buyOrSellShopItem(index));
     }
   }
@@ -36,8 +38,10 @@ export const Shop = () => {
             onClick={() => handleClick(index)}
             cannotClick={
               clickedShop !== undefined ||
-              (isBought[index] && shopContents[index].price > money) ||
-              (!isBought[index] && shopContents[index].unlockPrice > money)
+              (isBought[index] &&
+                new Decimal(shopContents[index].price).gt(money)) ||
+              (!isBought[index] &&
+                new Decimal(shopContents[index].unlockPrice).gt(money))
             }
             key={index}></ShopItem>
         );

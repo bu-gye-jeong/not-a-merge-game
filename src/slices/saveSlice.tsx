@@ -2,26 +2,26 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { shopContents } from "../constants/shopContents";
 
 interface ISaveState {
-  inventory: number[];
+  inventory: string[];
   invMax: number;
   itemBought: boolean[];
-  money: number;
+  money: string;
   clickedShop?: number;
   clickedNumber?: number[];
 }
 
 export const initialState = {
-  inventory: [1],
+  inventory: ["1"],
   invMax: 5,
   itemBought: new Array(shopContents.length).fill(false),
-  money: 0,
+  money: "0",
 } as ISaveState;
 
 const saveSlice = createSlice({
   name: "save",
   initialState,
   reducers: {
-    addNumber(state, action: PayloadAction<number>) {
+    addNumber(state, action: PayloadAction<string>) {
       if (state.invMax > state.inventory.length)
         state.inventory.push(action.payload);
     },
@@ -36,8 +36,8 @@ const saveSlice = createSlice({
       state.invMax = action.payload;
       state.inventory = state.inventory.slice(0, state.invMax);
     },
-    addMoney(state, action: PayloadAction<number>) {
-      state.money += action.payload;
+    setMoney(state, action: PayloadAction<string>) {
+      state.money = action.payload;
     },
     clearClicked(state, action: PayloadAction) {
       delete state.clickedNumber;
@@ -69,7 +69,7 @@ export const {
   removeNumberByIndex,
   buyOrSellShopItem,
   changeInvMax,
-  addMoney,
+  setMoney,
   clearClicked,
   clickNumber,
   clickShop,

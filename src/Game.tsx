@@ -1,7 +1,8 @@
+import Decimal from "decimal.js";
 import React, { useState } from "react";
 import { tabs } from "./constants/tabs";
 import { Inventory } from "./containers/inventory";
-import { removeNumberByIndex, addMoney } from "./slices/saveSlice";
+import { removeNumberByIndex, setMoney } from "./slices/saveSlice";
 import { useAppDispatch, useAppSelector } from "./utils/hooks";
 
 function Game() {
@@ -10,20 +11,24 @@ function Game() {
   const [curTab, setTab] = useState(0);
 
   const inv = useAppSelector((state) => state.save.inventory);
+  const money = useAppSelector((state) => state.save.money);
 
   const handleSellAll = () => {
-    let money = 0;
+    let moneyToAdd = new Decimal("0");
     for (let i = inv.length - 1; i > 0; i--) {
-      money += inv[i];
+      moneyToAdd = moneyToAdd.add(inv[i]);
       dispatch(removeNumberByIndex(i));
     }
-    dispatch(addMoney(money));
+    dispatch(setMoney(Decimal.add(money, moneyToAdd).toString()));
   };
 
   const tabNavs = (
     <div id="tabNavs">
       {tabs.map((v, i) => (
-        <span className="tabNav" onClick={() => setTab(i)} key={i}>
+        <span
+          className={`tabNav ${i === curTab ? "selected" : ""}`}
+          onClick={() => setTab(i)}
+          key={i}>
           {v.name}
         </span>
       ))}
