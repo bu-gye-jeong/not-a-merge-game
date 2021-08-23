@@ -57,7 +57,7 @@ const saveSlice = createSlice({
       }
       state.clickedNumber.push(action.payload);
     },
-    hardReset(state, action: PayloadAction) {
+    hardReset(state) {
       state.invMax = initialState.invMax;
       state.inventory = initialState.inventory;
       state.itemBought = initialState.itemBought;
@@ -74,6 +74,9 @@ const saveSlice = createSlice({
     buyUpgrade(state, action: PayloadAction<number>) {
       state.upgrade[action.payload] += 1;
     },
+    sellUpgrade(state, action: PayloadAction<number>) {
+      state.upgrade[action.payload] -= 1;
+    },
   },
 });
 
@@ -89,6 +92,7 @@ export const {
   hardReset,
   setStartingNumber,
   buyUpgrade,
+  sellUpgrade,
 } = saveSlice.actions;
 
 export default saveSlice.reducer;

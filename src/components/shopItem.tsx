@@ -1,5 +1,6 @@
 import React from "react";
 import { IShopContent } from "../constants/shopContents";
+import ReactHtmlParser from "react-html-parser";
 
 export const ShopItem = ({
   content,
@@ -20,7 +21,11 @@ export const ShopItem = ({
             ${isClicked ? "clicked" : ""}
             ${cannotClick ? "cannotClick" : ""}`}
       onClick={onClick}>
-      {isOpen ? <span className="exp">{content.exp}</span> : ""}
+      {isOpen ? (
+        <span className="exp">{ReactHtmlParser(content.exp)}</span>
+      ) : (
+        ""
+      )}
       {isOpen
         ? " - Cost : " + content.price
         : content.unlockPrice + " to unlock"}

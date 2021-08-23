@@ -12,6 +12,13 @@ export interface IUpgrade {
     payload?: any;
     type: string;
   };
+  sellAction?(
+    count: number,
+    save: ISaveState
+  ): {
+    payload?: any;
+    type: string;
+  };
 }
 
 export const upgrades: IUpgrade[] = [
@@ -24,12 +31,15 @@ export const upgrades: IUpgrade[] = [
         .toString(),
     action: (count, { startingNumber }) =>
       setStartingNumber(Decimal.mul(startingNumber, 2).toString()),
+    sellAction: (count, { startingNumber }) =>
+      setStartingNumber(Decimal.div(startingNumber, 2).toString()),
   },
   {
     count: 5,
     content: "Expand inventory",
     price: (count) => Decimal.pow(1000, count).mul(30).toString(),
     action: (count, { invMax }) => setInvMax(invMax + 1),
+    sellAction: (count, { invMax }) => setInvMax(invMax - 1),
   },
   {
     count: 1,

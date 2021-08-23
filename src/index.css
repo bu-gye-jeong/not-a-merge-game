@@ -97,6 +97,11 @@ button:hover:not(.cannotClick) {
   font-size: 1.5em;
 }
 
+.exp sup {
+  font-family: "NeoEular";
+  font-size: 0.5em;
+}
+
 .shopItem.clicked {
   background-color: #ddd;
 }
@@ -113,8 +118,17 @@ button:hover:not(.cannotClick) {
   margin-top: 0;
 }
 
-.upgrade.max {
+.upgrade .max {
   background-color: #ddd;
+}
+
+.buyUpgrade {
+  width: 77%;
+}
+
+.sellUpgrade {
+  width: 20%;
+  margin-left: 3%;
 }
 
 /* options */
