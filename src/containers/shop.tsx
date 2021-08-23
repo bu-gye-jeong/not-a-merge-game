@@ -1,7 +1,12 @@
 import React from "react";
 import { ShopItem } from "../components/shopItem";
 import { shopContents } from "../constants/shopContents";
-import { setMoney, buyOrSellShopItem, clickShop } from "../slices/saveSlice";
+import {
+  setMoney,
+  buyOrSellShopItem,
+  clickShop,
+  clearClicked,
+} from "../slices/saveSlice";
 import { D } from "../utils/decimal";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 
@@ -50,7 +55,9 @@ export const Shop = () => {
 
   return (
     <div id="shop" className="tab">
-      <h3 className="title">Shop - Press Esc to Reset</h3>
+      <h3 className="title" onClick={() => dispatch(clearClicked())}>
+        Shop - Press Here or Esc to Reset
+      </h3>
       {shopItems}
     </div>
   );
