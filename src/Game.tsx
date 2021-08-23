@@ -17,10 +17,11 @@ function Game() {
 
   const handleSellAll = () => {
     let moneyToAdd = D("0");
-    for (let i = inv.length - 1; i >= 0; i--) {
+    for (let i = inv.length - 1; i > 0; i--) {
       moneyToAdd = moneyToAdd.add(inv[i]);
       dispatch(removeNumberByIndex(i));
     }
+    dispatch(removeNumberByIndex(0));
     dispatch(addNumber(startingNumber));
     dispatch(setMoney(Decimal.add(money, moneyToAdd).toString()));
   };

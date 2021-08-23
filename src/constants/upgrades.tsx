@@ -19,7 +19,8 @@ export const upgrades: IUpgrade[] = [
     count: 4,
     content: "Multiply 2 to starting number",
     price: (count) => Decimal.pow(100, count + 1).toString(),
-    action: (count) => setStartingNumber(Decimal.pow(2, count).toString()),
+    action: (count, { startingNumber }) =>
+      setStartingNumber(Decimal.mul(startingNumber, 2).toString()),
   },
   {
     count: 5,
