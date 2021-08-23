@@ -25,4 +25,18 @@ export const shopContents: IShopContent[] = [
     unlockPrice: "100",
     price: "10",
   },
+  {
+    paramCount: 2,
+    exp: "2x+y",
+    calc: (num1, num2) => D(num1).mul(2).add(num2).toString(),
+    unlockPrice: "300",
+    price: "40",
+  },
+  {
+    paramCount: 1,
+    exp: "3x",
+    calc: (num) => D(num).mul(3).toString(),
+    unlockPrice: "2000",
+    price: "100",
+  },
 ];

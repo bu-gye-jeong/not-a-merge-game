@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { InvItem } from "../components/invItem";
 import { shopContents } from "../constants/shopContents";
 import { addNumber, clearClicked, clickNumber } from "../slices/saveSlice";
-import { useAppDispatch, useAppSelector } from "../utils/hooks";
+import { max } from "../utils/array";
+import { useAppDispatch, useAppSelector, useInterval } from "../utils/hooks";
 
 export const Inventory = () => {
   const dispatch = useAppDispatch();
@@ -13,21 +14,32 @@ export const Inventory = () => {
   const clickedNumber = useAppSelector((state) => state.save.clickedNumber);
   const money = useAppSelector((state) => state.save.money);
 
-  const handleClick = (index: number) => {
-    if (
-      clickedShop === undefined ||
-      (clickedNumber !== undefined && clickedNumber.includes(index))
-    )
-      return;
-    const shopContent = shopContents[clickedShop!];
-    if (clickedNumber?.length ?? 0 + 1 < shopContent.paramCount)
-      return dispatch(clickNumber(index));
-    const calcParam = clickedNumber
-      ? [...clickedNumber, index].map((v) => inventory[v])
-      : [inventory[index]];
-    dispatch(addNumber(shopContent.calc(...calcParam)));
-    dispatch(clearClicked());
-  };
+  const handleClick = useCallback(
+    (index: number) => {
+      if (
+        clickedShop === undefined ||
+        (clickedNumber !== undefined && clickedNumber.includes(index))
+      )
+        return;
+      const shopContent = shopContents[clickedShop!];
+      if ((clickedNumber?.length ?? 0) + 1 < shopContent.paramCount)
+        return dispatch(clickNumber(index));
+      const calcParam = clickedNumber
+        ? [...clickedNumber, index].map((v) => inventory[v])
+        : [inventory[index]];
+      dispatch(addNumber(shopContent.calc(...calcParam)));
+      dispatch(clearClicked());
+    },
+    [clickedNumber, clickedShop, dispatch, inventory]
+  );
+
+  // Auto-select the greatest number;
+  const autoUpgrade = useAppSelector((state) => state.save.upgrade[2]);
+  useInterval(() => {
+    if (autoUpgrade === 1 && typeof clickedShop !== "undefined") {
+      handleClick(max(inventory).index);
+    }
+  }, 1000);
 
   return (
     <div id="inventory" className="tab">

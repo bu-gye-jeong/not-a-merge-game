@@ -13,9 +13,9 @@ export const PlainButton = ({
 }) => {
   return (
     <button onClick={onClick} className={`plainButton ${className}`} id={id}>
-      {content.split("\n").map((line) => {
+      {content.split("\n").map((line, i) => {
         return (
-          <span>
+          <span key={i}>
             {line}
             <br />
           </span>

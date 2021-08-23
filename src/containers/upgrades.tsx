@@ -17,18 +17,22 @@ export const Upgrades = () => {
     if (price.gt(money)) return;
     dispatch(setMoney(D(money).sub(price).toString()));
     dispatch(buyUpgrade(i));
-    dispatch(v.action(upgrade[i], save));
+    if (v.action) dispatch(v.action(upgrade[i], save));
   };
 
   const upgradeBtns = upgrades.map((v, i) => {
     return (
       <PlainButton
-        content={v.content + "\nCost : " + v.price(upgrade[i])}
+        content={`${v.content} - ${upgrade[i]}/${v.count}\nCost : ${v.price(
+          upgrade[i]
+        )}`}
         onClick={() => handleClick(v, i)}
         id={"upgrade" + i}
         className={`upgrade ${
-          D(v.price(upgrade[i])).gt(money) ? "cannotClick" : ""
-        }`}
+          D(v.price(upgrade[i])).gt(money) || upgrade[i] === v.count
+            ? "cannotClick"
+            : ""
+        } ${upgrade[i] === v.count ? "max" : ""}`}
         key={i}></PlainButton>
     );
   });

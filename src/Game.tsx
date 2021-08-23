@@ -1,8 +1,13 @@
 import Decimal from "decimal.js";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { tabs } from "./constants/tabs";
 import { Inventory } from "./containers/inventory";
-import { addNumber, removeNumberByIndex, setMoney } from "./slices/saveSlice";
+import {
+  addNumber,
+  clearClicked,
+  removeNumberByIndex,
+  setMoney,
+} from "./slices/saveSlice";
 import { D } from "./utils/decimal";
 import { useAppDispatch, useAppSelector } from "./utils/hooks";
 
@@ -40,6 +45,24 @@ function Game() {
   );
 
   const Abc = tabs[curTab].tab;
+
+  const _handleKeyDown = (event: KeyboardEvent) => {
+    switch (event.key) {
+      case "Esc":
+      case "Escape":
+        dispatch(clearClicked());
+        break;
+      default:
+        return;
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", _handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", _handleKeyDown);
+    };
+  });
 
   return (
     <div className="App">

@@ -13,6 +13,7 @@ export const Shop = () => {
   const clickedShop = useAppSelector((state) => state.save.clickedShop);
 
   function handleClick(index: number) {
+    if (clickedShop) return;
     const DecMoney = D(money);
     if (isBought[index]) {
       const price = D(shopContents[index].price);
@@ -49,7 +50,7 @@ export const Shop = () => {
 
   return (
     <div id="shop" className="tab">
-      <h3 className="title">Shop</h3>
+      <h3 className="title">Shop - Press Esc to Reset</h3>
       {shopItems}
     </div>
   );

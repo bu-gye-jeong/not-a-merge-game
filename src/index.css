@@ -26,6 +26,10 @@ button {
   vertical-align: middle;
 }
 
+button:focus {
+  outline: 0;
+}
+
 button:not(:hover):not(.cannotClick) {
   transition-duration: 0.2s;
   background-color: #aaa;
@@ -105,8 +109,12 @@ button:hover:not(.cannotClick) {
 
 .upgrade {
   line-height: 2em;
-  margin-left: 5vw;
-  margin-right: 5vw;
+  margin: 5%;
+  margin-top: 0;
+}
+
+.upgrade.max {
+  background-color: #ddd;
 }
 
 /* options */
