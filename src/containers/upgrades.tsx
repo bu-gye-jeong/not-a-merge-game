@@ -16,14 +16,14 @@ export const Upgrades = () => {
     if (upgrade[i] >= v.count) return;
     const price = D(v.price(upgrade[i]));
     if (price.gt(money)) return;
-    dispatch(setMoney(D(money).sub(price).toFixed(2)));
+    dispatch(setMoney(D(money).sub(price).toString()));
     dispatch(buyUpgrade(i));
     if (v.action) dispatch(v.action(upgrade[i], save));
   };
   const handleSell = (v: IUpgrade, i: number) => {
     if (upgrade[i] <= 0) return;
     const price = D(v.price(upgrade[i] - 1));
-    dispatch(setMoney(D(price).mul(0.5).add(money).toFixed(2)));
+    dispatch(setMoney(D(price).mul(0.5).add(money).toString()));
     dispatch(sellUpgrade(i));
     if (v.sellAction) dispatch(v.sellAction(upgrade[i], save));
   };

@@ -1,8 +1,10 @@
 import React, { useCallback } from "react";
 import { InvItem } from "../components/invItem";
+import { maxDigit } from "../constants/numbers";
 import { shopContents } from "../constants/shopContents";
 import { addNumber, clearClicked, clickNumber } from "../slices/saveSlice";
 import { max } from "../utils/array";
+import { setMaxDigit } from "../utils/decimal";
 import { useAppDispatch, useAppSelector, useInterval } from "../utils/hooks";
 
 export const Inventory = () => {
@@ -46,12 +48,12 @@ export const Inventory = () => {
       <h3 className="title">
         Inventory - {inventory.length} / {invMax}
       </h3>
-      <h3 id="resourceDisplayer">Money : {money}</h3>
+      <h3 id="resourceDisplayer">Money : {setMaxDigit(money, maxDigit)}</h3>
       <div id="invItems">
         {inventory.map((item, index) => {
           return (
             <InvItem
-              content={item}
+              content={setMaxDigit(item, maxDigit)}
               cannotClick={
                 clickedShop === undefined ||
                 (clickedNumber !== undefined && clickedNumber.includes(index))

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { countToReset } from "../constants/countToReset";
+import { countToReset } from "../constants/numbers";
 
 export const ResetButton = ({ reset }: { reset(): void }) => {
   const [count, setCount] = useState(0);
