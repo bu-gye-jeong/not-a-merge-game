@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/not-a-merge-game/static/css/main.bd8f2e92.chunk.css",
-    "main.js": "/not-a-merge-game/static/js/main.5564f8b7.chunk.js",
-    "main.js.map": "/not-a-merge-game/static/js/main.5564f8b7.chunk.js.map",
+    "main.js": "/not-a-merge-game/static/js/main.df2cf8f2.chunk.js",
+    "main.js.map": "/not-a-merge-game/static/js/main.df2cf8f2.chunk.js.map",
     "runtime-main.js": "/not-a-merge-game/static/js/runtime-main.95947f9d.js",
     "runtime-main.js.map": "/not-a-merge-game/static/js/runtime-main.95947f9d.js.map",
     "static/js/2.8736c3a2.chunk.js": "/not-a-merge-game/static/js/2.8736c3a2.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.95947f9d.js",
     "static/js/2.8736c3a2.chunk.js",
     "static/css/main.bd8f2e92.chunk.css",
-    "static/js/main.5564f8b7.chunk.js"
+    "static/js/main.df2cf8f2.chunk.js"
   ]
 }
