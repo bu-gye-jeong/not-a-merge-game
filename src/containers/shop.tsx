@@ -28,14 +28,14 @@ export const Shop = () => {
   const selectInvItem = useSelectInvItem();
 
   function handleClick(index: number) {
-    if (
-      clickedShop ||
-      inventory.length === invMax ||
-      inventory.length < shopContents[index].paramCount
-    )
-      return;
+    if (clickedShop) return;
     const DecMoney = D(money);
     if (isBought[index]) {
+      if (
+        inventory.length === invMax ||
+        inventory.length < shopContents[index].paramCount
+      )
+        return;
       const price = D(shopContents[index].price);
       if (price.gt(DecMoney)) return;
       dispatch(setMoney(DecMoney.sub(price).toString()));
@@ -65,11 +65,11 @@ export const Shop = () => {
             onClick={() => handleClick(index)}
             cannotClick={
               clickedShop !== undefined ||
-              (isBought[index] && D(shopContents[index].price).gt(money)) ||
-              (!isBought[index] &&
-                D(shopContents[index].unlockPrice).gt(money)) ||
-              inventory.length === invMax ||
-              inventory.length < item.paramCount
+              (isBought[index]
+                ? D(shopContents[index].price).gt(money) ||
+                  inventory.length === invMax ||
+                  inventory.length < item.paramCount
+                : D(shopContents[index].unlockPrice).gt(money))
             }
             key={index}></ShopItem>
         );
