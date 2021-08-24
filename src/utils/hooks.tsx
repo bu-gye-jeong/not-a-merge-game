@@ -1,5 +1,7 @@
 import { useRef, useEffect } from "react";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { shopContents } from "../constants/shopContents";
+import { addNumber, clearClicked, clickNumber } from "../slices/saveSlice";
 import type { RootState, AppDispatch } from "../store";
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -26,4 +28,29 @@ export const useInterval = (
       return () => clearInterval(id);
     }
   }, [delay]);
+};
+
+export const useSelectInvItem = () => {
+  const clickedShop = useAppSelector((state) => state.save.clickedShop);
+  const clickedNumber = useAppSelector((state) => state.save.clickedNumber);
+  const inventory = useAppSelector((state) => state.save.inventory);
+  const dispatch = useAppDispatch();
+
+  return (index: number, shopIndex = clickedShop) => {
+    if (
+      shopIndex === undefined ||
+      (clickedNumber !== undefined && clickedNumber.includes(index))
+    )
+      return;
+    const shopContent = shopContents[shopIndex];
+    if ((clickedNumber?.length ?? 0) + 1 < shopContent.paramCount) {
+      dispatch(clickNumber(index));
+      return;
+    }
+    const calcParam = clickedNumber
+      ? [...clickedNumber, index].map((v) => inventory[v])
+      : [inventory[index]];
+    dispatch(addNumber(shopContent.calc(...calcParam)));
+    dispatch(clearClicked());
+  };
 };

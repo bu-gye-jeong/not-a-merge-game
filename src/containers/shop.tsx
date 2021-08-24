@@ -7,8 +7,13 @@ import {
   clickShop,
   clearClicked,
 } from "../slices/saveSlice";
+import { max } from "../utils/array";
 import { D } from "../utils/decimal";
-import { useAppDispatch, useAppSelector } from "../utils/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useSelectInvItem,
+} from "../utils/hooks";
 
 export const Shop = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +21,10 @@ export const Shop = () => {
   const isBought = useAppSelector((state) => state.save.itemBought);
   const money = useAppSelector((state) => state.save.money);
   const clickedShop = useAppSelector((state) => state.save.clickedShop);
+  const upgrade = useAppSelector((state) => state.save.upgrade);
+  const inventory = useAppSelector((state) => state.save.inventory);
+
+  const selectInvItem = useSelectInvItem();
 
   function handleClick(index: number) {
     if (clickedShop) return;
@@ -25,6 +34,12 @@ export const Shop = () => {
       if (price.gt(DecMoney)) return;
       dispatch(setMoney(DecMoney.sub(price).toString()));
       dispatch(clickShop(index));
+      // auto-click number
+      if (upgrade[2] !== 0)
+        setTimeout(
+          () => selectInvItem(max(inventory).index, index),
+          (3 - upgrade[2]) * 250
+        );
     } else {
       const price = D(shopContents[index].unlockPrice);
       if (price.gt(DecMoney)) return;

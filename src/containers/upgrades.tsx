@@ -1,8 +1,9 @@
 import React from "react";
 import { UpgradeButton } from "../components/upgradeButton";
+import { maxDigit } from "../constants/numbers";
 import { IUpgrade, upgrades } from "../constants/upgrades";
 import { buyUpgrade, sellUpgrade, setMoney } from "../slices/saveSlice";
-import { D } from "../utils/decimal";
+import { D, setMaxDigit } from "../utils/decimal";
 import { useAppDispatch, useAppSelector } from "../utils/hooks";
 
 export const Upgrades = () => {
@@ -32,7 +33,9 @@ export const Upgrades = () => {
     return (
       <UpgradeButton
         content={`${v.content} - ${upgrade[i]}/${v.count}\nCost : ${
-          upgrade[i] >= v.count ? "LVL MAX" : v.price(upgrade[i])
+          upgrade[i] >= v.count
+            ? "LVL MAX"
+            : setMaxDigit(v.price(upgrade[i]), maxDigit)
         }`}
         onBuy={() => handleBuy(v, i)}
         buyClassName={`buyUpgrade ${

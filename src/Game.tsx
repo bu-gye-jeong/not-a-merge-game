@@ -1,5 +1,5 @@
 import Decimal from "decimal.js";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { tabs } from "./constants/tabs";
 import { Inventory } from "./containers/inventory";
 import {
@@ -17,10 +17,11 @@ function Game() {
   const [curTab, setTab] = useState(0);
 
   const inv = useAppSelector((state) => state.save.inventory);
+  const invMax = useAppSelector((state) => state.save.invMax);
   const money = useAppSelector((state) => state.save.money);
   const startingNumber = useAppSelector((state) => state.save.startingNumber);
 
-  const handleSellAll = () => {
+  const handleSellAll = useCallback(() => {
     let moneyToAdd = D("0");
     for (let i = inv.length - 1; i > 0; i--) {
       moneyToAdd = moneyToAdd.add(inv[i]);
@@ -29,7 +30,16 @@ function Game() {
     dispatch(removeNumberByIndex(0));
     dispatch(addNumber(startingNumber));
     dispatch(setMoney(Decimal.add(money, moneyToAdd).toString()));
-  };
+  }, [dispatch, inv, money, startingNumber]);
+
+  // auto sell when inventory is full
+  const autoUpgrade = useAppSelector((state) => state.save.upgrade[3]);
+  useEffect(() => {
+    if (autoUpgrade !== 1) return;
+    if (inv.length === invMax) {
+      handleSellAll();
+    }
+  }, [inv, invMax, handleSellAll, autoUpgrade]);
 
   const tabNavs = (
     <div id="tabNavs">

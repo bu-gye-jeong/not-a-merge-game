@@ -42,8 +42,13 @@ export const upgrades: IUpgrade[] = [
     sellAction: (count, { invMax }) => setInvMax(invMax - 1),
   },
   {
-    count: 1,
+    count: 3,
     content: "Auto-select the greatest number",
-    price: () => "5000",
+    price: (count) => Decimal.pow(100, count).mul(5000).toString(),
+  },
+  {
+    count: 1,
+    content: "Auto-sell when inventory is full",
+    price: () => "300000",
   },
 ];

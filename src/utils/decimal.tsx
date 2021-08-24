@@ -6,7 +6,7 @@ export const setMaxDigit = (value: Decimal.Value, digit: number) => {
   const num = D(value).toPrecision(5);
 
   if (num.includes("e")) {
-    return num.replace(/0+(?=e)/g, "");
+    return num.replace(/0+(?=e)/g, "").replace(/\.(?=e)/g, "");
   } else {
     return num.replace(/(\..*?)0+$/, "$1").replace(/\.$/, "");
   }
