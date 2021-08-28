@@ -1,6 +1,8 @@
 import React from "react";
 import { IShopContent } from "../constants/shopContents";
 import ReactHtmlParser from "react-html-parser";
+import { maxDigit } from "../constants/numbers";
+import { setMaxDigit } from "../utils/decimal";
 
 export const ShopItem = ({
   content,
@@ -27,8 +29,8 @@ export const ShopItem = ({
         ""
       )}
       {isOpen
-        ? " - Cost : " + content.price
-        : content.unlockPrice + " to unlock"}
+        ? " - Cost : " + setMaxDigit(content.price, maxDigit)
+        : setMaxDigit(content.unlockPrice, maxDigit) + " to unlock"}
     </button>
   );
 };

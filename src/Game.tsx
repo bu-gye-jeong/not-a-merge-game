@@ -16,6 +16,7 @@ function Game() {
 
   const [curTab, setTab] = useState(0);
 
+  const save = useAppSelector((state) => state.save);
   const inv = useAppSelector((state) => state.save.inventory);
   const invMax = useAppSelector((state) => state.save.invMax);
   const money = useAppSelector((state) => state.save.money);
@@ -43,14 +44,17 @@ function Game() {
 
   const tabNavs = (
     <div id="tabNavs">
-      {tabs.map((v, i) => (
-        <span
-          className={`tabNav ${i === curTab ? "selected" : ""}`}
-          onClick={() => setTab(i)}
-          key={i}>
-          {v.name}
-        </span>
-      ))}
+      {tabs.map((v, i) => {
+        if (v.condition && !v.condition(save)) return true;
+        return (
+          <span
+            className={`tabNav ${i === curTab ? "selected" : ""}`}
+            onClick={() => setTab(i)}
+            key={i}>
+            {v.name}
+          </span>
+        );
+      })}
     </div>
   );
 

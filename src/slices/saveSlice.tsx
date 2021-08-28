@@ -9,6 +9,7 @@ export interface ISaveState {
   money: string;
   startingNumber: string;
   upgrade: number[];
+  tabUnlocked: boolean[];
   clickedShop?: number;
   clickedNumber?: number[];
 }
@@ -20,6 +21,7 @@ export const initialState = {
   money: "0",
   startingNumber: "1",
   upgrade: new Array(upgrades.length).fill(0),
+  tabUnlocked: [true, true, false, true],
 } as ISaveState;
 
 const saveSlice = createSlice({
@@ -77,6 +79,9 @@ const saveSlice = createSlice({
     sellUpgrade(state, action: PayloadAction<number>) {
       state.upgrade[action.payload] -= 1;
     },
+    unlockTab(state, action: PayloadAction<number>) {
+      state.tabUnlocked[action.payload] = true;
+    },
   },
 });
 
@@ -93,6 +98,7 @@ export const {
   setStartingNumber,
   buyUpgrade,
   sellUpgrade,
+  unlockTab,
 } = saveSlice.actions;
 
 export default saveSlice.reducer;
