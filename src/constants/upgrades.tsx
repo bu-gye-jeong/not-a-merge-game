@@ -23,10 +23,10 @@ export interface IUpgrade {
 
 export const upgrades: IUpgrade[] = [
   {
-    count: 4,
+    count: 10,
     content: "Multiply 2 to starting number",
     price: (count) =>
-      Decimal.pow(10, count + 1)
+      Decimal.pow(10, 1 + [0, 1, 2, 3, 4, 6, 9, 16, 25, 36, 81][count])
         .mul(10)
         .toString(),
     action: (count, { startingNumber }) =>

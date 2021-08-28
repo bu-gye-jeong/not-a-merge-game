@@ -46,4 +46,11 @@ export const shopContents: IShopContent[] = [
     unlockPrice: "100000",
     price: "5000",
   },
+  {
+    paramCount: 1,
+    exp: "3x<sup>1.1</sup>",
+    calc: (num) => D(num).pow(1.1).mul(3).toString(),
+    unlockPrice: "1e+6",
+    price: "50000",
+  },
 ];
