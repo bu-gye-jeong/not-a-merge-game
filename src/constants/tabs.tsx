@@ -1,4 +1,5 @@
 import { Options } from "../containers/options";
+import { Prestige } from "../containers/prestige";
 import { Shop } from "../containers/shop";
 import { Upgrades } from "../containers/upgrades";
 import { ISaveState } from "../slices/saveSlice";
@@ -16,7 +17,7 @@ export const tabs: ITab[] = [
   { name: "upgrades", tab: Upgrades },
   {
     name: "prestige",
-    tab: Upgrades,
+    tab: Prestige,
     condition: (save) => D(save.money).gt("3e+5"),
   },
   { name: "option", tab: Options },

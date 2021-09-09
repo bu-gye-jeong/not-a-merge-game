@@ -7,6 +7,7 @@ import {
   clearClicked,
   removeNumberByIndex,
   setMoney,
+  unlockTab,
 } from "./slices/saveSlice";
 import { D } from "./utils/decimal";
 import { useAppDispatch, useAppSelector } from "./utils/hooks";
@@ -21,6 +22,7 @@ function Game() {
   const invMax = useAppSelector((state) => state.save.invMax);
   const money = useAppSelector((state) => state.save.money);
   const startingNumber = useAppSelector((state) => state.save.startingNumber);
+  const tabUnlocked = useAppSelector((state) => state.save.tabUnlocked);
 
   const handleSellAll = useCallback(() => {
     let moneyToAdd = D("0");
@@ -42,10 +44,17 @@ function Game() {
     }
   }, [inv, invMax, handleSellAll, autoUpgrade]);
 
+  useEffect(() => {
+    tabs.forEach((v, i) => {
+      if (tabUnlocked[i]) return;
+      if (v.condition ? v.condition(save) : true) dispatch(unlockTab(i));
+    });
+  }, [save, dispatch, tabUnlocked]);
+
   const tabNavs = (
     <div id="tabNavs">
       {tabs.map((v, i) => {
-        if (v.condition && !v.condition(save)) return true;
+        if (!tabUnlocked[i]) return true;
         return (
           <span
             className={`tabNav ${i === curTab ? "selected" : ""}`}

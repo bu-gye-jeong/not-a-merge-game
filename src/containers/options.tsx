@@ -1,13 +1,13 @@
 import React from "react";
 import { ResetButton } from "../components/ResetButton";
-import { hardReset } from "../slices/saveSlice";
+import { resetProgress } from "../slices/saveSlice";
 import { useAppDispatch } from "../utils/hooks";
 
 export const Options = () => {
   const dispatch = useAppDispatch();
 
   const reset = () => {
-    dispatch(hardReset());
+    dispatch(resetProgress(1000));
   };
 
   return (

@@ -9,7 +9,9 @@ export interface ISaveState {
   money: string;
   startingNumber: string;
   upgrade: number[];
+  ppUpgrade: number[];
   tabUnlocked: boolean[];
+  pp: string;
   clickedShop?: number;
   clickedNumber?: number[];
 }
@@ -21,7 +23,9 @@ export const initialState = {
   money: "0",
   startingNumber: "1",
   upgrade: new Array(upgrades.length).fill(0),
+  ppUpgrade: new Array(upgrades.length).fill(0),
   tabUnlocked: [true, true, false, true],
+  pp: "0",
 } as ISaveState;
 
 const saveSlice = createSlice({
@@ -59,16 +63,23 @@ const saveSlice = createSlice({
       }
       state.clickedNumber.push(action.payload);
     },
-    hardReset(state) {
+    resetProgress(state, action: PayloadAction<number>) {
       state.invMax = initialState.invMax;
       state.inventory = initialState.inventory;
       state.itemBought = initialState.itemBought;
       state.money = initialState.money;
       state.startingNumber = initialState.startingNumber;
       state.upgrade = initialState.upgrade;
+      state.ppUpgrade = initialState.ppUpgrade;
       delete state.clickedNumber;
       delete state.clickedShop;
-      localStorage.removeItem("notAMergeGame");
+      if (action.payload >= 1) {
+        state.pp = initialState.pp;
+      }
+      if (action.payload >= 5) {
+        state.tabUnlocked = initialState.tabUnlocked;
+        localStorage.removeItem("notAMergeGame");
+      }
     },
     setStartingNumber(state, action: PayloadAction<string>) {
       state.startingNumber = action.payload;
@@ -79,8 +90,17 @@ const saveSlice = createSlice({
     sellUpgrade(state, action: PayloadAction<number>) {
       state.upgrade[action.payload] -= 1;
     },
+    buyPPUpgrade(state, action: PayloadAction<number>) {
+      state.ppUpgrade[action.payload] += 1;
+    },
+    sellPPUpgrade(state, action: PayloadAction<number>) {
+      state.ppUpgrade[action.payload] -= 1;
+    },
     unlockTab(state, action: PayloadAction<number>) {
       state.tabUnlocked[action.payload] = true;
+    },
+    setPP(state, action: PayloadAction<string>) {
+      state.pp = action.payload;
     },
   },
 });
@@ -94,11 +114,14 @@ export const {
   clearClicked,
   clickNumber,
   clickShop,
-  hardReset,
+  resetProgress,
   setStartingNumber,
   buyUpgrade,
   sellUpgrade,
+  buyPPUpgrade,
+  sellPPUpgrade,
   unlockTab,
+  setPP,
 } = saveSlice.actions;
 
 export default saveSlice.reducer;

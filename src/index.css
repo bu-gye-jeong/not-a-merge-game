@@ -7,14 +7,11 @@
 
 * {
   font-family: "Bungee", cursive;
+  margin: 0;
 }
 
 body {
   background-color: #111;
-}
-
-:is(h1, h2, h3, h4, h5, h6) {
-  margin: 0;
 }
 
 /* button (+ transition) */
@@ -79,7 +76,6 @@ button:hover:not(.cannotClick) {
 .title {
   text-align: center;
   position: sticky;
-  flex-basis: 100%;
 }
 
 /* shop */
@@ -112,13 +108,13 @@ button:hover:not(.cannotClick) {
   grid-template-columns: repeat(2, 50%);
 }
 
-.upgrade {
+#upgradesGrid .upgrade {
   line-height: 2em;
   margin: 5%;
   margin-top: 0;
 }
 
-.upgrade .max {
+#upgradesGrid .upgrade .max {
   background-color: #ddd;
 }
 
@@ -131,6 +127,52 @@ button:hover:not(.cannotClick) {
   margin-left: 3%;
 }
 
+/* prestige */
+#prestige {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#prestigeButton {
+  width: 90%;
+  margin: 0% 5% 0% 5%;
+  height: 3em;
+}
+
+#ppUpgrades {
+  display: flex;
+  line-height: 2em;
+  margin: 3% 5% 3% 5%;
+  flex-grow: 1;
+}
+
+#ppUpgrades > h4 {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  margin-right: 3%;
+}
+
+#ppUpgradeGrid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 33.3333%);
+}
+
+#ppUpgradeGrid .upgrade {
+  margin: 3%;
+  margin-bottom: 2.9%;
+}
+
+.ppUpgrade {
+  width: 100%;
+  height: 100%;
+}
+
+.ppUpgrade .max {
+  background-color: #ddd;
+}
+
 /* options */
 #options {
   text-align: center;
@@ -141,8 +183,14 @@ button:hover:not(.cannotClick) {
   margin-top: 5vh;
 }
 
-#resourceDisplayer {
+#displayer {
   margin-left: 1em;
+  display: grid;
+  grid-auto-flow: column;
+}
+
+#displayer > .pp {
+  grid-column: 2 / 6;
 }
 
 #invItems {

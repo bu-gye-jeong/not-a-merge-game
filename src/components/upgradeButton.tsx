@@ -9,9 +9,9 @@ export const UpgradeButton = ({
 }: {
   content: string;
   onBuy: React.MouseEventHandler<HTMLButtonElement>;
-  onSell: React.MouseEventHandler<HTMLButtonElement>;
+  onSell?: React.MouseEventHandler<HTMLButtonElement>;
   buyClassName: string;
-  sellClassName: string;
+  sellClassName?: string;
 }) => {
   return (
     <div className="upgrade">
@@ -26,9 +26,11 @@ export const UpgradeButton = ({
         })}
       </button>
 
-      <button className={sellClassName} onClick={onSell}>
-        Sell
-      </button>
+      {(onSell || sellClassName) && (
+        <button className={sellClassName} onClick={onSell}>
+          Sell
+        </button>
+      )}
     </div>
   );
 };
